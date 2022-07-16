@@ -53,24 +53,24 @@ end
 
 -- Lets fucking go bois and check for a local interaction :hehe:
 
---function executeInteraction()
-    --local pos = GetEntityCoords(PlayerPedId())
-    --local vehicle = IsPedInAnyVehicle(PlayerPedId(), false)
+function executeInteraction()
+    local pos = GetEntityCoords(PlayerPedId())
+    local vehicle = IsPedInAnyVehicle(PlayerPedId(), false)
 
-    --if vehicle then
-        --rint('Oh boi you in a car!')
-        --return
-    --end
+    if vehicle then
+        rint('Oh boi you in a car!')
+        return
+    end
 
-   -- for _,v in pairs(_interactions) do
- --       local intPos = v.pos
-  --      dist = #(pos - intPos)
-  --      if dist < 3 then
-  --          v.action()
-  --          return
-  --      end
-   -- end
---end
+    for _,v in pairs(_interactions) do
+        local intPos = v.pos
+       dist = #(pos - intPos)
+        if dist < 3 then
+            v.action()
+            return
+       end
+    end
+end
 
 RegisterCommand('executeInteraction', function()
     executeInteraction()
