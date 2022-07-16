@@ -156,15 +156,12 @@ _startNpcThread = function ()
  end)
 end
 
-local loaded = false
-
-RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
-    if not loaded then
-        _startInteractionThread()
-        _startNpcThread()
-        npcThread()
-        loaded = true
-    end
+AddEventHandler('onResourceStart', function(resource)
+	if resource == GetCurrentResourceName() then
+		Wait(5000) -- Idk just to make it work for now
+		_startInteractionThread()
+		_startNpcThread()
+	end
 end)
 
 exports('registerInteraction', function(data)
