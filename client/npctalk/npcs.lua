@@ -103,10 +103,6 @@ npcThread = function()
     end)
 end
 
-RegisterNetEvent('QBCore:Client:OnPlayerUnload', function()
-    _npcs = {}
-end)
-
 exports('registerNPC', function(data)
     return registerNPC(data)
 end)

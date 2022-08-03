@@ -80,7 +80,7 @@ RegisterKeyMapping('executeInteraction', 'Interaction keybind', 'keyboard', 'E')
 
 AddEventHandler('onResourceStart', function (resourece)
     if resource == GetCurrentResourceName() then
-        Wait(500)
+        Wait(5000)
         _ped = PlayerPedId()
     end
 end)
