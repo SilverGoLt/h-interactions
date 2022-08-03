@@ -57,10 +57,7 @@ function executeInteraction()
     local pos = GetEntityCoords(PlayerPedId())
     local vehicle = IsPedInAnyVehicle(PlayerPedId(), false)
 
-    if vehicle then
-        rint('Oh boi you in a car!')
-        return
-    end
+    if vehicle then return end
 
     for _,v in pairs(_interactions) do
         local intPos = v.pos
