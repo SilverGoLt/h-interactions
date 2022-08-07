@@ -75,10 +75,14 @@ end)
 
 RegisterKeyMapping('executeInteraction', 'Interaction keybind', 'keyboard', 'E')
 
-AddEventHandler('onResourceStart', function (resourece)
-    if resource == GetCurrentResourceName() then
-        Wait(5000)
+local isLoaded = false
+RegisterNetEvent('ox:playerLoaded', function()
+    if not isLoaded then
+        isLoaded = true
         _ped = PlayerPedId()
+        _startInteractionThread()
+        _startNpcThread()
+        npcThread()
     end
 end)
 
@@ -152,14 +156,6 @@ _startNpcThread = function ()
     end
  end)
 end
-
-AddEventHandler('onResourceStart', function(resource)
-	if resource == GetCurrentResourceName() then
-		Wait(5000) -- Idk just to make it work for now
-		_startInteractionThread()
-		_startNpcThread()
-	end
-end)
 
 exports('registerInteraction', function(data)
     return registerInteraction(data.name, data.text, data.pos, data.action, data.secondText, data.dist)
