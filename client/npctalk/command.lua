@@ -32,7 +32,6 @@ RegisterNUICallback('closeDialog', function(data, cb)
 end)
 
 setCameraToNPC = function()
-    local _ped = PlayerPedId()
     local npc = getClosestNPC()
     if npc then
         local heading = GetEntityHeading(npc.entity)
