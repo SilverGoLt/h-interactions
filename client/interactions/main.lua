@@ -123,19 +123,22 @@ end
 local _niSleep = 1000
 _startNpcThread = function ()
  CreateThread(function()
+	local showing = false
     while true do
         local pos = GetEntityCoords(PlayerPedId())
+		local inZone = false
         for i = 1, #_npcs do
             local npc = _npcs[i]
             local nPos = npc.details.pos
             dist = #(nPos - pos)
             if dist < 3 and npc.spawned then
+				inZone = true
                 -- Show interaction prompt via UI
                 local headID = GetPedBoneIndex(npc.entity, 31086)
                 local headPos = GetWorldPositionOfEntityBone(npc.entity, headID)
                 retval, screenX, screenY = GetScreenCoordFromWorldCoord(headPos.x, headPos.y, headPos.z)
                 local scale = (100 - dist) / 100
-
+				showing = true
                 sendToUI('showInteraction', {
                     x = screenX,
                     y = screenY,
@@ -145,13 +148,15 @@ _startNpcThread = function ()
 
                 _niSleep = 25
                 break
-            else
-                sendToUI('showInteraction', {
-                    display = false
-                })
-                _niSleep = 1000
             end
         end
+		if not inZone and showing then
+			showing = false
+			sendToUI('showInteraction', {
+                display = false
+            })
+			_niSleep = 1000
+		end
         Wait(_niSleep)
     end
  end)
