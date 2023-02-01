@@ -53,9 +53,6 @@ export default {
             nui('action', {name: name, label: label})
         }
     },
-    mounted() {
-        // Let's loop trough skinData and gather only necessary items
-    },
 };
 </script>
 
